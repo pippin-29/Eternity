@@ -47,6 +47,7 @@ none draw_list_box_1(t_program *c)
 
 none	draw_(t_program *c)
 {
+	
 	attron(COLOR_PAIR(REG_FILE));
 	mvprintw(0, 32, "%s", c->title);
 	i_P	i;
