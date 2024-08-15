@@ -34,6 +34,13 @@
 # define CTRL_q 					('q' & 0x1f)
 
 
+
+# define DIRECTORY		4
+# define REG_FILE		8
+# define DIRECTORY_H	1
+# define REG_FILE_H		2
+
+
 #define STARTSET  0
 #define _A		  1
 #define	_B		  2
