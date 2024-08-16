@@ -14,33 +14,50 @@
 none draw_list_box_1(t_program *c)
 {
 	i_P i;
+	i_P q;
+	i_P	pane;
 
+	pane = 1;
+	q = 0;
 	i = 2;
-	while (i < 32)
+	while (q < 90)
 	{
-		if (c->cursorY == i && c->cursorX < 34 && c->file_entries[i].type == REG_FILE)
+		if (c->cursorY == i && c->file_entries[q].type == REG_FILE && c->cursorX == pane)
 		{
 			attron(COLOR_PAIR(REG_FILE_H));
-			mvprintw(i, 2, "%s", c->file_entries[i].name);
-			attroff(COLOR_PAIR(REG_FILE_H));
-		} else if(c->cursorY == i && c->cursorX < 34 && c->file_entries[i].type == DIRECTORY)
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
+			mvprintw(33, 2, "%s", c->file_entries[q].name);
+			// attroff(COLOR_PAIR(REG_FILE_H));
+		} 
+		else if(c->cursorY == i && c->file_entries[q].type == DIRECTORY && c->cursorX == pane)
 		{
 			attron(COLOR_PAIR(DIRECTORY_H));
-			mvprintw(i, 2, "%s", c->file_entries[i].name);
-			attroff(COLOR_PAIR(DIRECTORY_H));
-		} else if (c->cursorY != i && c->cursorX < 34 && c->file_entries[i].type == REG_FILE)
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
+			mvprintw(33, 2, "%s", c->file_entries[q].name);
+			// attroff(COLOR_PAIR(DIRECTORY_H));
+		}
+		else if (c->cursorY != i && c->file_entries[q].type == REG_FILE)
 		{
 			attron(COLOR_PAIR(REG_FILE));
-			mvprintw(i, 2, "%s", c->file_entries[i].name);
-			attroff(COLOR_PAIR(REG_FILE));
-		} else if (c->cursorY != i && c->cursorX < 34 && c->file_entries[i].type == DIRECTORY)
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
+			// attroff(COLOR_PAIR(REG_FILE));
+		} 
+		else if (c->cursorY != i && c->file_entries[q].type == DIRECTORY)
 		{
 			attron(COLOR_PAIR(DIRECTORY));
-			mvprintw(i, 2, "%s", c->file_entries[i].name);
-			attroff(COLOR_PAIR(DIRECTORY));
-		} else { mvprintw(i, 2, "%s", c->file_entries[i].name); }
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
+			// attroff(COLOR_PAIR(DIRECTORY));
+		} else { mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name); }
 		i++;
-		if (i == c->filecount)
+		q++;
+		if (i == 32)
+		{
+			i = 2;
+			pane += 32;
+		}
+		if (pane > 66)
+			pane = 2;
+		if (q == c->filecount || q == 90)
 			break ;
 	}
 }
