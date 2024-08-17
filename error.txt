@@ -1,3 +1,2 @@
 opendir(c->cwd)
 opendir(c->cwd)
-dd
