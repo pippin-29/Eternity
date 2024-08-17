@@ -34,15 +34,16 @@ here:
 				remove(c->usefile); 
 				free(c->usefile);
 				list_dir_content(c);
-			} 
-			// else if (c->file_entries[c->currentfile].type == DIRECTORY)
-			// {
-			// 	c->usefile = dc_strjoin_e(4, c->cwd, "/", c->file_entries[c->currentfile].name, "/");
-			// 	rmdir(c->usefile); 
-			// 	free(c->usefile);
-			// 	list_dir_content(c);
-			// }
+			}
 			goto here;
+
+		case(CTRL_i):
+			endwin();
+			system("nano");
+			initscr();
+			keypad(stdscr, TRUE);
+			list_dir_content(c);
+			goto here;	
 
 		case('\n'): // Use File or Folder
 			if (c->file_entries[c->currentfile].type == REG_FILE)
@@ -51,7 +52,8 @@ here:
 				c->usefile = dc_strjoin_e(5, "nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
 				system(c->usefile); free(c->usefile);
 				initscr();
-				keypad(stdscr, TRUE);				
+				keypad(stdscr, TRUE);
+				list_dir_content(c);				
 			} 
 			else if (c->file_entries[c->currentfile].type == DIRECTORY)
 			{

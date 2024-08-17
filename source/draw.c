@@ -91,10 +91,11 @@ none	draw_(t_program *c)
 		mvprintw(32, i, "-");
 		i++;
 	}
-	mvprintw(34, 66, "PgDn     - Next Pane");
-	mvprintw(35, 66, "Entr     - Use File");
+	mvprintw(34, 66,"PgDn     - Next Pane");
+	mvprintw(35, 66,"Entr     - Use File");
 	mvprintw(34, 2, "PgUp     - Prev Pane");
 	mvprintw(35, 2, "CTRL_DEL - Remove File");
+	mvprintw(36, 2, "CTRL_I   - Insert File");
 
 	draw_panes(c);
 	
