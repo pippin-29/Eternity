@@ -38,7 +38,8 @@ typedef struct s_file_entries
 } t_file_entries;
 
 typedef struct s_eternity
-{
+{	
+	i_P			offset;
 	i_P			in;
 	i_H			*title;
 	i_P			cursorX;

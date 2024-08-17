@@ -14,7 +14,7 @@
 none draw_panes(t_program *c)
 {
 	i_P i;
-	iP_1 q;
+	i_P q;
 	i_P	pane;
 
 	pane = 1;
@@ -22,31 +22,33 @@ none draw_panes(t_program *c)
 	i = 2;
 	while (q < c->filecount)
 	{
-		if (c->cursorY == i && c->file_entries[q].type == REG_FILE && c->cursorX == pane)
+		if (c->cursorY == i && c->file_entries[q + c->offset].type == REG_FILE && c->cursorX == pane)
 		{
 			attron(COLOR_PAIR(REG_FILE_H));
-			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
-			mvprintw(33, 2, "%s", c->file_entries[q].name);
-			c->currentfile = q;
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
+			mvprintw(33, 2, "%s", c->file_entries[q + c->offset].name);
+			c->currentfile = q + c->offset;
+			mvprintw(42, 42, "%d", c->currentfile);
 		} 
-		else if(c->cursorY == i && c->file_entries[q].type == DIRECTORY && c->cursorX == pane)
+		else if(c->cursorY == i && c->file_entries[q + c->offset].type == DIRECTORY && c->cursorX == pane)
 		{
 			attron(COLOR_PAIR(DIRECTORY_H));
-			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
-			mvprintw(33, 2, "%s", c->file_entries[q].name);
-			c->currentfile = q;
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
+			mvprintw(33, 2, "%s", c->file_entries[q + c->offset].name);
+			c->currentfile = q + c->offset;
+			mvprintw(42, 42, "%d", c->currentfile);
 		}
-		else if (c->cursorY != i && c->file_entries[q].type == REG_FILE)
+		else if (c->cursorY != i && c->file_entries[q + c->offset].type == REG_FILE)
 		{
 			attron(COLOR_PAIR(REG_FILE));
-			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
 		} 
-		else if (c->cursorY != i && c->file_entries[q].type == DIRECTORY)
+		else if (c->cursorY != i && c->file_entries[q + c->offset].type == DIRECTORY)
 		{
 			attron(COLOR_PAIR(DIRECTORY));
-			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
+			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
 
-		} else { mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name); }
+		} else { mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name); }
 		i++;
 		q++;
 		if (i == 32)
@@ -56,7 +58,7 @@ none draw_panes(t_program *c)
 		}
 		if (pane > 66)
 			pane = 2;
-		if (q == c->filecount || q == 90)
+		if (q + c->offset == c->filecount || q == 90)
 			break ;
 	}
 }

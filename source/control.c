@@ -27,6 +27,16 @@ here:
 			clear();
 			break ;
 		
+		case(KEY_NPAGE):
+			if ((c->offset + 90) < c->filecount)
+				c->offset += 90;
+			goto here;
+
+		case(KEY_PPAGE):
+			if (c->offset >= 90)
+				c->offset -= 90;
+			goto here;
+
 		case(CTRL_DEL):
 			if (c->file_entries[c->currentfile].type == REG_FILE)
 			{

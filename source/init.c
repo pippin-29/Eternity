@@ -13,6 +13,7 @@
 
 none	init_(t_program *c, i_H * title)
 {
+	c->offset = 0;
 	c->title = dc_strdup(title);
 	c->cursorX = 1;
 	c->cursorY = 2;
