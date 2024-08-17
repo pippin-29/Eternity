@@ -40,7 +40,6 @@ typedef struct s_file_entries
 typedef struct s_eternity
 {
 	i_P			in;
-	i_H			confirm;
 	i_H			*title;
 	i_P			cursorX;
 	i_P			cursorY;

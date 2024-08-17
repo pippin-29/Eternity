@@ -69,16 +69,5 @@ here:
 		default:
 			goto here;
 	}
-	mvprintw(4, 5, "You have tried to quit, are you sure?");
-	mvprintw(5, 5, "__'y'__ to quit");
-	switch (c->confirm = getch())
-	{
-		case('y'):
-			break ;
-		default:
-			clear();
-			refresh();
-			goto here;
-	}
 	cleanup(c); // endwin
 }
