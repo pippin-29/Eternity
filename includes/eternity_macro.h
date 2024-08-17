@@ -41,75 +41,49 @@
 # define DIRECTORY_H	1
 # define REG_FILE_H		2
 
+# define PANE_SIZE		90
+# define BORDER_A		0
+# define BORDER_B		32
+# define BORDER_C		64
+# define BORDER_D		96
 
-#define STARTSET  0
-#define _A		  1
-#define	_B		  2
-#define	_C		  3
-#define	_D		  4
-#define	_E		  5
-#define	_F		  6
-#define	_G		  7
-#define	_H		  8
-#define	_I		  9
-#define	_J		 10
-#define	_K		 11
-#define	_L		 12
-#define	_M		 13
-#define	_N		 14
-#define	_O		 15
-#define	_P		 16
-#define	A_		 17
-#define	B_		 18
-#define	C_		 19
-#define	D_		 20
-#define	E_		 21
-#define	F_		 22
-#define	G_		 23
-#define	H_		 24
-#define	I_		 25
-#define	J_		 26
-#define	K_		 27
-#define	L_		 28
-#define	M_		 29
-#define	N_		 30
-#define	O_		 31
-#define	P_		 32
-#define NL		 33
 
-#define _0_		"STARTSET"
-#define _1_		"_A"
-#define	_2_		"_B"
-#define	_3_		"_C"
-#define	_4_		"_D"
-#define	_5_		"_E"
-#define	_6_		"_F"
-#define	_7_		"_G"
-#define	_8_		"_H"
-#define	_9_		"_I"
-#define	_10_	"_J"
-#define	_11_	"_K"
-#define	_12_	"_L"
-#define	_13_	"_M"
-#define	_14_	"_N"
-#define	_15_	"_O"
-#define	_16_	"_P"
-#define	_17_	"A_"
-#define	_18_	"B_"
-#define	_19_	"C_"
-#define	_20_	"D_"
-#define	_21_	"E_"
-#define	_22_	"F_"
-#define	_23_	"G_"
-#define	_24_	"H_"
-#define	_25_	"I_"
-#define	_26_	"J_"
-#define	_27_	"K_"
-#define	_28_	"L_"
-#define	_29_	"M_"
-#define	_30_	"N_"
-#define	_31_	"O_"
-#define	_32_	"P_"
-#define _33_	"NL"
+#define P_0		  0
+#define _A1		  1
+#define	_B1		  2
+#define	_C1		  3
+#define	_D1		  4
+#define	_E1		  5
+#define	_F1		  6
+#define	_G1		  7
+#define	_H1		  8
+#define	_I1		  9
+#define	_J1		 10
+#define	_K1		 11
+#define	_L1		 12
+#define	_M1		 13
+#define	_N1		 14
+#define	_O1		 15
+#define	_P1		 16
+#define	A_1		 17
+#define	B_1		 18
+#define	C_1		 19
+#define	D_1		 20
+#define	E_1		 21
+#define	F_1		 22
+#define	G_1		 23
+#define	H_1		 24
+#define	I_1		 25
+#define	J_1		 26
+#define	K_1		 27
+#define	L_1		 28
+#define	M_1		 29
+#define	N_1		 30
+#define	O_1		 31
+#define	P_1		 32
+
+#define P_2		 64
+#define P_3		 96
+
 
 #endif

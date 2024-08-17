@@ -51,10 +51,10 @@ none draw_panes(t_program *c)
 		} else { mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name); }
 		i++;
 		q++;
-		if (i == 32)
+		if (i == P_1)
 		{
 			i = 2;
-			pane += 32;
+			pane += P_1;
 		}
 		if (pane > 66)
 			pane = 2;
@@ -67,30 +67,30 @@ none	draw_(t_program *c)
 {
 	
 	attron(COLOR_PAIR(REG_FILE));
-	mvprintw(0, 32, "%s", c->title);
+	mvprintw(0, P_1, "%s", c->title);
 	i_P	i;
 
 	i = 0;
 	
-	while (i <= 96)
+	while (i <= P_3)
 	{
-		mvprintw(1, i, "-");
+		mvprintw(_A1, i, "-");
 		i++;
 	}
 	i = 2;
-	while (i < 32)
+	while (i < P_1)
 	{
-		mvprintw(i, 0, "|");
-		mvprintw(i, 32, "|");
-		mvprintw(i, 64, "|");
-		mvprintw(i, 96, "|");
+		mvprintw(i, P_0, "|");
+		mvprintw(i, P_1, "|");
+		mvprintw(i, P_2, "|");
+		mvprintw(i, P_3, "|");
 	
 		i++;
 	}
 	i = 0;
 	while (i <= 96)
 	{
-		mvprintw(32, i, "-");
+		mvprintw(P_1, i, "-");
 		i++;
 	}
 	mvprintw(34, 66,"PgDn     - Next Pane");

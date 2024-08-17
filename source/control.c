@@ -28,13 +28,13 @@ here:
 			break ;
 		
 		case(KEY_NPAGE):
-			if ((c->offset + 90) < c->filecount)
-				c->offset += 90;
+			if ((c->offset + PANE_SIZE) < c->filecount)
+				c->offset += PANE_SIZE;
 			goto here;
 
 		case(KEY_PPAGE):
-			if (c->offset >= 90)
-				c->offset -= 90;
+			if (c->offset >= PANE_SIZE)
+				c->offset -= PANE_SIZE;
 			goto here;
 
 		case(CTRL_DEL):
