@@ -30,6 +30,5 @@ none	init_(t_program *c, i_H * title)
 	init_pair(REG_FILE, COLOR_GREEN, COLOR_BLACK); // file
 	init_pair(DIRECTORY_H, COLOR_BLACK, COLOR_RED); // highlight folder
 	init_pair(DIRECTORY, COLOR_RED, COLOR_BLACK); // folder
-	attron(COLOR_PAIR(REG_FILE));
 
 }
