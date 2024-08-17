@@ -16,9 +16,9 @@ none	init_(t_program *c, i_H * title)
 	c->title = dc_strdup(title);
 	c->cursorX = 1;
 	c->cursorY = 2;
+	c->currentfile = -1;
 	getcwd(c->cwd, sizeof(c->cwd));
 	list_dir_content(c);
-
 
 	initscr();
 	raw();

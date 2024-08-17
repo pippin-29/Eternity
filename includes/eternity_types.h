@@ -50,6 +50,8 @@ typedef struct s_eternity
 	DIR				*directory;
 	iP_1			filecount;
 	t_file_entries	*file_entries;
+	iP_1			currentfile;
+	i_H 			*usefile;
 
 
 } t_program;

@@ -34,7 +34,6 @@
 # define CTRL_q 					('q' & 0x1f)
 
 
-
 # define DIRECTORY		4
 # define REG_FILE		8
 # define DIRECTORY_H	1

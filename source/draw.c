@@ -14,7 +14,7 @@
 none draw_list_box_1(t_program *c)
 {
 	i_P i;
-	i_P q;
+	iP_1 q;
 	i_P	pane;
 
 	pane = 1;
@@ -27,6 +27,7 @@ none draw_list_box_1(t_program *c)
 			attron(COLOR_PAIR(REG_FILE_H));
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
 			mvprintw(33, 2, "%s", c->file_entries[q].name);
+			c->currentfile = q;
 			// attroff(COLOR_PAIR(REG_FILE_H));
 		} 
 		else if(c->cursorY == i && c->file_entries[q].type == DIRECTORY && c->cursorX == pane)
@@ -34,6 +35,7 @@ none draw_list_box_1(t_program *c)
 			attron(COLOR_PAIR(DIRECTORY_H));
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
 			mvprintw(33, 2, "%s", c->file_entries[q].name);
+			c->currentfile = q;
 			// attroff(COLOR_PAIR(DIRECTORY_H));
 		}
 		else if (c->cursorY != i && c->file_entries[q].type == REG_FILE)
@@ -92,6 +94,9 @@ none	draw_(t_program *c)
 		mvprintw(32, i, "-");
 		i++;
 	}
+	mvprintw(34, 66, "PgDn - Next Pane");
+	mvprintw(35, 66, "Entr - Use File");
+	mvprintw(34, 2, "PgUp - Prev Pane");
 
 	draw_list_box_1(c);
 	
