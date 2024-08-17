@@ -28,7 +28,6 @@ none draw_panes(t_program *c)
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
 			mvprintw(33, 2, "%s", c->file_entries[q].name);
 			c->currentfile = q;
-			// attroff(COLOR_PAIR(REG_FILE_H));
 		} 
 		else if(c->cursorY == i && c->file_entries[q].type == DIRECTORY && c->cursorX == pane)
 		{
@@ -36,19 +35,17 @@ none draw_panes(t_program *c)
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
 			mvprintw(33, 2, "%s", c->file_entries[q].name);
 			c->currentfile = q;
-			// attroff(COLOR_PAIR(DIRECTORY_H));
 		}
 		else if (c->cursorY != i && c->file_entries[q].type == REG_FILE)
 		{
 			attron(COLOR_PAIR(REG_FILE));
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
-			// attroff(COLOR_PAIR(REG_FILE));
 		} 
 		else if (c->cursorY != i && c->file_entries[q].type == DIRECTORY)
 		{
 			attron(COLOR_PAIR(DIRECTORY));
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name);
-			// attroff(COLOR_PAIR(DIRECTORY));
+
 		} else { mvprintw(i, pane + 1, "%.30s", c->file_entries[q].name); }
 		i++;
 		q++;
@@ -94,9 +91,10 @@ none	draw_(t_program *c)
 		mvprintw(32, i, "-");
 		i++;
 	}
-	mvprintw(34, 66, "PgDn - Next Pane");
-	mvprintw(35, 66, "Entr - Use File");
-	mvprintw(34, 2, "PgUp - Prev Pane");
+	mvprintw(34, 66, "PgDn     - Next Pane");
+	mvprintw(35, 66, "Entr     - Use File");
+	mvprintw(34, 2, "PgUp     - Prev Pane");
+	mvprintw(35, 2, "CTRL_DEL - Remove File");
 
 	draw_panes(c);
 	
