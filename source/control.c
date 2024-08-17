@@ -77,12 +77,12 @@ here:
 
 		case (KEY_RIGHT): // move cursor
 			if (c->cursorX < 65)
-				c->cursorX += 32;
+				c->cursorX += P_1;
 			goto here;
 
 		case (KEY_LEFT): // move cursor
 			if (c->cursorX > 2)
-				c->cursorX -= 32;
+				c->cursorX -= P_1;
 			goto here;
 
 		case (KEY_UP): // move cursor

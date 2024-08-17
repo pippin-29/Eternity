@@ -74,7 +74,7 @@ none	draw_(t_program *c)
 	
 	while (i <= P_3)
 	{
-		mvprintw(_A1, i, "-");
+		mvprintw(_A, i, "-");
 		i++;
 	}
 	i = 2;
