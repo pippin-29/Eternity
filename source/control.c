@@ -27,6 +27,23 @@ here:
 			clear();
 			break ;
 		
+		case(CTRL_DEL):
+			if (c->file_entries[c->currentfile].type == REG_FILE)
+			{
+				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+				remove(c->usefile); 
+				free(c->usefile);
+				list_dir_content(c);
+			} 
+			// else if (c->file_entries[c->currentfile].type == DIRECTORY)
+			// {
+			// 	c->usefile = dc_strjoin_e(4, c->cwd, "/", c->file_entries[c->currentfile].name, "/");
+			// 	rmdir(c->usefile); 
+			// 	free(c->usefile);
+			// 	list_dir_content(c);
+			// }
+			goto here;
+
 		case('\n'): // Use File or Folder
 			if (c->file_entries[c->currentfile].type == REG_FILE)
 			{
@@ -44,7 +61,6 @@ here:
 				getcwd(c->cwd, 1024);
 				list_dir_content(c);
 			}
-			
 			goto here;
 
 		case (KEY_RIGHT): // move cursor

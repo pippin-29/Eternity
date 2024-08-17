@@ -11,7 +11,7 @@
 
 #include "../includes/eternity.h"
 
-none draw_list_box_1(t_program *c)
+none draw_panes(t_program *c)
 {
 	i_P i;
 	iP_1 q;
@@ -20,7 +20,7 @@ none draw_list_box_1(t_program *c)
 	pane = 1;
 	q = 0;
 	i = 2;
-	while (q < 90)
+	while (q < c->filecount)
 	{
 		if (c->cursorY == i && c->file_entries[q].type == REG_FILE && c->cursorX == pane)
 		{
@@ -98,7 +98,7 @@ none	draw_(t_program *c)
 	mvprintw(35, 66, "Entr - Use File");
 	mvprintw(34, 2, "PgUp - Prev Pane");
 
-	draw_list_box_1(c);
+	draw_panes(c);
 	
 }
 

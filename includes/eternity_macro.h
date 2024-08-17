@@ -32,6 +32,7 @@
 //---------------------------------------------------------
 
 # define CTRL_q 					('q' & 0x1f)
+# define CTRL_DEL					(100)
 
 
 # define DIRECTORY		4
