@@ -87,7 +87,7 @@ here:
 			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
 			{
 				endwin();
-				c->usefile = dc_strjoin_e(5, "nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
+				c->usefile = dc_strjoin_e(5, "./pkg/nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
 				system(c->usefile); free(c->usefile);
 				initscr();
 				keypad(stdscr, TRUE);
