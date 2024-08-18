@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${default}",
-                "${workspaceFolder}/includes"
+                "${workspaceFolder}/includes",
+                "${workspaceFolder}/Forge/includes"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

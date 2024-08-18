@@ -34,6 +34,19 @@ here:
 		case(CTRL_q): // quit
 			clear();
 			break ;
+
+		case(CTRL_r): // run program
+			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
+			{
+				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+				endwin();
+				system(c->usefile);
+				free(c->usefile);
+				initscr();
+				keypad(stdscr, TRUE);				
+				list_dir_content(c);
+			}
+			goto here;
 		
 		case(KEY_NPAGE):
 			if ((c->offset + PANE_SIZE) < c->filecount)

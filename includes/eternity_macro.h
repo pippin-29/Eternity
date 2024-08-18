@@ -35,6 +35,7 @@
 # define CTRL_DEL					(100)
 # define CTRL_i						('i' & 0x1f)
 # define CTRL_y						('y' & 0x1f)
+# define CTRL_r						('r' & 0x1f)
 
 
 # define DIRECTORY		4
