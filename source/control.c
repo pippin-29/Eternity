@@ -77,7 +77,7 @@ here:
 
 		case(CTRL_i): // inserts file
 			endwin();
-			system("nano");
+			system("./pkg/nano");
 			initscr();
 			keypad(stdscr, TRUE);
 			list_dir_content(c);
