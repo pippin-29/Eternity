@@ -16,6 +16,15 @@
 t_cleanup_function	cleanup(t_program *c);
 none				free_file_entries(t_file_entries *f, iP_1 fc);
 
+// CONTROL_C
+none				run_(t_program *c);
+
+// CURSOR_C
+none				move_cursor_up(t_program *c);
+none				move_cursor_down(t_program *c);
+none				move_cursor_left(t_program *c);
+none				move_cursor_right(t_program *c);
+
 // DANC_C
 uP_2				dc_strlen(i_H *c); 								// counts string
 i_H					*dc_strjoin_e(uP_2 c, ...);						// variable number string joiner
@@ -69,15 +78,12 @@ i_P					dc_alloc_2D_i_H(i_H ***object, u_P strings, u_P characters);
 
 // DRAW_C
 none				draw_(t_program *c);
+none 				draw_panes(t_program *c);
 
 // INIT_C
 none				init_(t_program *c, i_H * title);
 
 // LIST_C
 none				list_dir_content(t_program *c);
-
-// RUN_C
-none				run_(t_program *c);
-
 
 #endif

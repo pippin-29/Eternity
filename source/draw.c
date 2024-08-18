@@ -17,6 +17,7 @@ none draw_panes(t_program *c)
 	i_P q;
 	i_P	pane;
 
+	c->fileselected = 0;
 	pane = 1;
 	q = 0;
 	i = 2;
@@ -28,7 +29,8 @@ none draw_panes(t_program *c)
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
 			mvprintw(33, 2, "%s", c->file_entries[q + c->offset].name);
 			c->currentfile = q + c->offset;
-			mvprintw(42, 42, "%d", c->currentfile);
+			mvprintw(38, 0, "%d", c->currentfile);
+			c->fileselected = 1;
 		} 
 		else if(c->cursorY == i && c->file_entries[q + c->offset].type == DIRECTORY && c->cursorX == pane)
 		{
@@ -36,7 +38,8 @@ none draw_panes(t_program *c)
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
 			mvprintw(33, 2, "%s", c->file_entries[q + c->offset].name);
 			c->currentfile = q + c->offset;
-			mvprintw(42, 42, "%d", c->currentfile);
+			mvprintw(38, 0, "%d", c->currentfile);
+			c->fileselected = 1;
 		}
 		else if (c->file_entries[q + c->offset].type == REG_FILE)
 		{
@@ -48,6 +51,7 @@ none draw_panes(t_program *c)
 			attron(COLOR_PAIR(DIRECTORY));
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
 		}
+		mvprintw(0, 0, "%d", c->fileselected);
 		i++;
 		q++;
 		if (i == P_1)
@@ -59,8 +63,6 @@ none draw_panes(t_program *c)
 			pane = 2;
 
 		
-		
-		
 		if (q + c->offset == c->filecount || q == 90)
 			break ;
 	}
@@ -70,6 +72,7 @@ none	draw_(t_program *c)
 {
 	
 	attron(COLOR_PAIR(REG_FILE));
+	mvprintw(0, P_2, "CTRL_Y - yosh.i");
 	mvprintw(0, P_1, "%s", c->title);
 	i_P	i;
 
@@ -96,11 +99,31 @@ none	draw_(t_program *c)
 		mvprintw(P_1, i, "-");
 		i++;
 	}
-	mvprintw(34, 66,"PgDn     - Next Pane");
-	mvprintw(35, 66,"Entr     - Use File");
-	mvprintw(34, 2, "PgUp     - Prev Pane");
-	mvprintw(35, 2, "CTRL_DEL - Remove File");
+	i = 33;
+	while (i < 38)
+	{
+		mvprintw(i, P_0, "|");
+		mvprintw(i, P_1, "|");
+		mvprintw(i, P_2, "|");
+		mvprintw(i, P_3, "|");
+	
+		i++;
+	}
+	mvprintw(34, 2, "Enter    - Use File");
+	mvprintw(35, 2, "CTRL_DEL - Remove File/Folder");
 	mvprintw(36, 2, "CTRL_I   - Insert File");
+
+	mvprintw(34, 34, "CTRL_R   - Run Program");
+
+	mvprintw(35, 66, "PgDn     - Next Pane");	
+	mvprintw(34, 66, "PgUp     - Prev Pane");
+	
+	i = 0;
+	while (i <= 96)
+	{
+		mvprintw(37, i, "-");
+		i++;
+	}
 
 	draw_panes(c);
 	

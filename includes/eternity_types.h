@@ -51,6 +51,7 @@ typedef struct s_eternity
 	iP_1			filecount;
 	t_file_entries	*file_entries;
 	iP_1			currentfile;
+	i_P				fileselected;
 	i_H 			*usefile;
 
 

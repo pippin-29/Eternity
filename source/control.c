@@ -23,6 +23,14 @@ here:
 
 	switch (c->in = getch())
 	{
+		case (CTRL_y): // yosh.i shell
+			endwin();
+			system("./pkg/yosh.i");
+			initscr();
+			keypad(stdscr, TRUE);
+			list_dir_content(c);
+			goto here ;
+
 		case(CTRL_q): // quit
 			clear();
 			break ;
@@ -38,16 +46,23 @@ here:
 			goto here;
 
 		case(CTRL_DEL):
-			if (c->file_entries[c->currentfile].type == REG_FILE)
+			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
 			{
 				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
 				remove(c->usefile); 
 				free(c->usefile);
 				list_dir_content(c);
 			}
+			else if (c->file_entries[c->currentfile].type == DIRECTORY && c->fileselected == 1)
+			{
+				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+				rmdir(c->usefile); 
+				free(c->usefile);
+				list_dir_content(c);
+			}
 			goto here;
 
-		case(CTRL_i):
+		case(CTRL_i): // inserts file
 			endwin();
 			system("nano");
 			initscr();
@@ -56,7 +71,7 @@ here:
 			goto here;	
 
 		case('\n'): // Use File or Folder
-			if (c->file_entries[c->currentfile].type == REG_FILE)
+			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
 			{
 				endwin();
 				c->usefile = dc_strjoin_e(5, "nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
@@ -65,7 +80,7 @@ here:
 				keypad(stdscr, TRUE);
 				list_dir_content(c);				
 			} 
-			else if (c->file_entries[c->currentfile].type == DIRECTORY)
+			else if (c->file_entries[c->currentfile].type == DIRECTORY && c->fileselected == 1)
 			{
 				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
 				chdir(c->usefile);
@@ -76,23 +91,23 @@ here:
 			goto here;
 
 		case (KEY_RIGHT): // move cursor
-			if (c->cursorX < 65)
-				c->cursorX += P_1;
+			move_cursor_right(c);
+
 			goto here;
 
 		case (KEY_LEFT): // move cursor
-			if (c->cursorX > 2)
-				c->cursorX -= P_1;
+			move_cursor_left(c);
+
 			goto here;
 
 		case (KEY_UP): // move cursor
-			if (c->cursorY > 2)
-				c->cursorY--;
+			move_cursor_up(c);
+
 			goto here;
 
 		case (KEY_DOWN): // move cursor
-			if (c->cursorY < 31)
-				c->cursorY++;
+			move_cursor_down(c);
+
 			goto here;
 		default:
 			goto here;
