@@ -17,6 +17,7 @@ none draw_panes(t_program *c)
 	i_P q;
 	i_P	pane;
 
+	c->fileselected = 0;
 	pane = 1;
 	q = 0;
 	i = 2;
