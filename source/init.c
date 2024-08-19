@@ -26,9 +26,9 @@ none	init_(t_program *c, i_H * title)
 	keypad(stdscr, TRUE);
 	noecho();
 	start_color();
-	init_pair(REG_FILE_H, COLOR_BLACK, COLOR_GREEN); // highlight file
-	init_pair(REG_FILE, COLOR_GREEN, COLOR_BLACK); // file
-	init_pair(DIRECTORY_H, COLOR_BLACK, COLOR_RED); // highlight folder
-	init_pair(DIRECTORY, COLOR_RED, COLOR_BLACK); // folder
+	init_pair(REG_FILE_H, COLOR_BLACK, COLOR_MAGENTA); // highlight file
+	init_pair(REG_FILE, COLOR_MAGENTA, COLOR_BLACK); // file
+	init_pair(DIRECTORY_H, COLOR_BLACK, COLOR_CYAN); // highlight folder
+	init_pair(DIRECTORY, COLOR_CYAN, COLOR_BLACK); // folder
 
 }

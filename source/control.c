@@ -3,7 +3,7 @@
 //**________________________________________________________________________________________________________________________**//
 //***     File: /media/danielle/Stuff/Programs/Eternity/source/control.c                                                   ***//
 //***     Project: /media/danielle/Stuff/Programs/Eternity                                                                 ***//
-//***     Header Created: Sat Aug 17 2024                                                                                  ***//
+//***     Header Created: Mon Aug 19 2024                                                                                  ***//
 //***     Author: Daniel Haddington [Danielle] at <danielle.sh.md@gmail.com>                                               ***//
 //***     Copyright (c) 2024 Daniel Haddington [Danielle]                                                                  ***//
 //**________________________________________________________________________________________________________________________**//
@@ -25,7 +25,7 @@ here:
 	{
 		case (CTRL_y): // yosh.i shell
 			endwin();
-			system("./pkg/yosh.i");
+			system("bash");
 			initscr();
 			keypad(stdscr, TRUE);
 			list_dir_content(c);
@@ -77,9 +77,23 @@ here:
 
 		case(CTRL_i): // inserts file
 			endwin();
-			system("./pkg/nano");
+			system("nano");
 			initscr();
 			keypad(stdscr, TRUE);
+			list_dir_content(c);
+			goto here;
+
+		case(CTRL_o): // inserts file
+			i_H buffer[128];
+			mvprintw(39, 24, "Folder Name:");
+			cbreak();
+			echo();
+			mvscanw(39, 38, "%127s", buffer);
+			c->usefile = dc_strdup(buffer);
+			noecho();
+			refresh();
+			mkdir(c->usefile, 0755);
+			free(c->usefile);
 			list_dir_content(c);
 			goto here;	
 
@@ -87,7 +101,7 @@ here:
 			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
 			{
 				endwin();
-				c->usefile = dc_strjoin_e(5, "./pkg/nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
+				c->usefile = dc_strjoin_e(5, "nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
 				system(c->usefile); free(c->usefile);
 				initscr();
 				keypad(stdscr, TRUE);
@@ -102,6 +116,7 @@ here:
 				list_dir_content(c);
 			}
 			goto here;
+		
 
 		case (KEY_RIGHT): // move cursor
 			move_cursor_right(c);
@@ -123,6 +138,7 @@ here:
 
 			goto here;
 		default:
+
 			goto here;
 	}
 	cleanup(c); // endwin

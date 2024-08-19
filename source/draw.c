@@ -72,7 +72,7 @@ none	draw_(t_program *c)
 {
 	
 	attron(COLOR_PAIR(REG_FILE));
-	mvprintw(0, P_2, "CTRL_Y - yosh.i");
+	mvprintw(0, P_2, "CTRL_Y - bash");
 	mvprintw(0, P_1, "%s", c->title);
 	i_P	i;
 
@@ -114,16 +114,19 @@ none	draw_(t_program *c)
 	mvprintw(36, 2, "CTRL_I   - Insert File");
 
 	mvprintw(34, 34, "CTRL_R   - Run Program");
-
-	mvprintw(35, 66, "PgDn     - Next Pane");	
-	mvprintw(34, 66, "PgUp     - Prev Pane");
 	
+	mvprintw(36, 34, "CTRL_R   - Insert Folder");
+
+	mvprintw(36, 66, "PgDn     - Next Pane");	
+	mvprintw(34, 66, "PgUp     - Prev Pane");
+
 	i = 0;
 	while (i <= 96)
 	{
 		mvprintw(37, i, "-");
 		i++;
 	}
+	mvprintw(38, 2, "%s", c->cwd);
 
 	draw_panes(c);
 	
