@@ -11,6 +11,24 @@
 
 #include "../includes/eternity.h"
 
+none	wrapped_mvprintw(i_P row, i_P col, i_P mx_len, i_H *s)
+{
+	i_P len;
+	i_P i;
+	i_P line_offset;
+
+	len = dc_strlen(s); 
+	i = 0;
+	line_offset = 0;
+	while (i < len)
+	{
+		mvprintw(row + line_offset, col, "%.*s", mx_len, s + i);
+
+		i += mx_len;
+		line_offset++;
+	}
+}
+
 none draw_panes(t_program *c)
 {
 	i_P i;
@@ -29,7 +47,7 @@ none draw_panes(t_program *c)
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
 			mvprintw(33, 2, "%s", c->file_entries[q + c->offset].name);
 			c->currentfile = q + c->offset;
-			mvprintw(38, 0, "%d", c->currentfile);
+			mvprintw(0, 95, "%d", c->currentfile);
 			c->fileselected = 1;
 		} 
 		else if(c->cursorY == i && c->file_entries[q + c->offset].type == DIRECTORY && c->cursorX == pane)
@@ -38,7 +56,7 @@ none draw_panes(t_program *c)
 			mvprintw(i, pane + 1, "%.30s", c->file_entries[q + c->offset].name);
 			mvprintw(33, 2, "%s", c->file_entries[q + c->offset].name);
 			c->currentfile = q + c->offset;
-			mvprintw(38, 0, "%d", c->currentfile);
+			mvprintw(0, 95, "%d", c->currentfile);
 			c->fileselected = 1;
 		}
 		else if (c->file_entries[q + c->offset].type == REG_FILE)
@@ -126,7 +144,7 @@ none	draw_(t_program *c)
 		mvprintw(37, i, "-");
 		i++;
 	}
-	mvprintw(38, 2, "%s", c->cwd);
+	wrapped_mvprintw(38, 1, 96, c->cwd);
 
 	draw_panes(c);
 	
