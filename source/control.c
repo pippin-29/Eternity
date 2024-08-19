@@ -59,20 +59,28 @@ here:
 			goto here;
 
 		case(CTRL_DEL):
-			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
+		if (c->fileselected == 1)
+		{
+			if (c->file_entries[c->currentfile].type == REG_FILE)
 			{
+				c->fileselected = 0;
 				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
 				remove(c->usefile); 
 				free(c->usefile);
+				
 				list_dir_content(c);
 			}
-			else if (c->file_entries[c->currentfile].type == DIRECTORY && c->fileselected == 1)
+			else if (c->file_entries[c->currentfile].type == DIRECTORY)
 			{
+				c->fileselected = 0;
 				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
 				rmdir(c->usefile); 
 				free(c->usefile);
+				c->fileselected = 0;
 				list_dir_content(c);
-			}
+			}			
+		}
+
 			goto here;
 
 		case(CTRL_i): // inserts file

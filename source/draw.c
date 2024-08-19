@@ -17,7 +17,6 @@ none draw_panes(t_program *c)
 	i_P q;
 	i_P	pane;
 
-	c->fileselected = 0;
 	pane = 1;
 	q = 0;
 	i = 2;
@@ -115,7 +114,7 @@ none	draw_(t_program *c)
 
 	mvprintw(34, 34, "CTRL_R   - Run Program");
 	
-	mvprintw(36, 34, "CTRL_R   - Insert Folder");
+	mvprintw(36, 34, "CTRL_O   - Insert Folder");
 
 	mvprintw(36, 66, "PgDn     - Next Pane");	
 	mvprintw(34, 66, "PgUp     - Prev Pane");
