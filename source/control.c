@@ -98,27 +98,26 @@ here:
 			goto here;
 
 		case(CTRL_DEL):
-		if (c->fileselected == 1)
-		{
-			if (c->file_entries[c->currentfile].type == REG_FILE)
+			if (c->fileselected == 1)
 			{
-				c->fileselected = 0;
-				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
-				remove(c->usefile); 
-				free(c->usefile);
-				
-				list_dir_content(c);
-			}
-			else if (c->file_entries[c->currentfile].type == DIRECTORY)
-			{
-				c->fileselected = 0;
-				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
-				rmdir(c->usefile); 
-				free(c->usefile);
-				list_dir_content(c);
-			}			
-		}
+				if (c->file_entries[c->currentfile].type == REG_FILE)
+				{
+					c->fileselected = 0;
+					c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+					remove(c->usefile); 
+					free(c->usefile);
 
+					list_dir_content(c);
+				}
+				else if (c->file_entries[c->currentfile].type == DIRECTORY)
+				{
+					c->fileselected = 0;
+					c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+					rmdir(c->usefile); 
+					free(c->usefile);
+					list_dir_content(c);
+				}			
+			}
 			goto here;
 
 		case(CTRL_i): // inserts file
@@ -129,7 +128,7 @@ here:
 			list_dir_content(c);
 			goto here;
 
-		case(CTRL_o): // inserts file
+		case(CTRL_o): // inserts folder
 			i_H buffer[128];
 			mvprintw(42, 1, "Folder Name:");
 			cbreak();
