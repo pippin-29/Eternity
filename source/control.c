@@ -16,7 +16,7 @@ none run_(t_program *c)
 {
 
 here:
-	clear();
+	erase();
 	draw_(c);
 	move(c->cursorY, c->cursorX);
 	refresh();
