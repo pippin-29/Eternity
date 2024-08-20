@@ -132,11 +132,12 @@ none	draw_(t_program *c)
 	mvprintw(36, 2, "CTRL_I   - Insert File");
 
 	mvprintw(34, 34, "CTRL_R   - Run Program");
-	
+	mvprintw(35, 34, "CTRL_U   - Copy File/Folder");	
 	mvprintw(36, 34, "CTRL_O   - Insert Folder");
 
-	mvprintw(36, 66, "PgDn     - Next Pane");	
 	mvprintw(34, 66, "PgUp     - Prev Pane");
+	mvprintw(35, 66, "CTRL_B   - Paste File/Folder");	
+	mvprintw(36, 66, "PgDn     - Next Pane");
 
 	i = 0;
 	while (i <= 96)
@@ -145,7 +146,7 @@ none	draw_(t_program *c)
 		i++;
 	}
 	wrapped_mvprintw(38, 1, 96, c->cwd);
-
+	mvprintw(50, 2, "Copied: %s  Filename: %s", c->copyfile, c->copyfilename);
 	draw_panes(c);
 	
 }

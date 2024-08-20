@@ -29,11 +29,50 @@ here:
 			initscr();
 			keypad(stdscr, TRUE);
 			list_dir_content(c);
-			goto here ;
+			goto here;
 
 		case(CTRL_q): // quit
 			clear();
 			break ;
+
+		case(CTRL_b): // paste file/folder
+			if (c->copyfile && c->copyfilename)
+			{
+				c->usefile = dc_strjoin_e(7, "cp -r", " ", c->copyfile, " ", c->cwd, "/", c->copyfilename);
+				system(c->usefile);
+				free(c->usefile);
+				list_dir_content(c);
+			}
+
+			goto here;
+
+		case(CTRL_u): // copy file/folder
+			if (c->fileselected == 1)
+			{
+				if (c->file_entries[c->currentfile].type == REG_FILE)
+				{
+					if (c->copyfile)
+						free(c->copyfile);
+					if (c->copyfilename)
+						free(c->copyfilename);
+					c->fileselected = 0;
+					c->copyfilename = dc_strdup(c->file_entries[c->currentfile].name);
+					c->copyfile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+					list_dir_content(c);
+				}
+				else if (c->file_entries[c->currentfile].type == DIRECTORY)
+				{
+					if (c->copyfile)
+						free(c->copyfile);
+					if (c->copyfilename)
+						free(c->copyfilename);
+					c->fileselected = 0;
+					c->copyfilename = dc_strdup(c->file_entries[c->currentfile].name);
+					c->copyfile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+					list_dir_content(c);
+				}			
+			}
+			goto here;
 
 		case(CTRL_r): // run program
 			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
@@ -76,7 +115,6 @@ here:
 				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
 				rmdir(c->usefile); 
 				free(c->usefile);
-				c->fileselected = 0;
 				list_dir_content(c);
 			}			
 		}
@@ -93,10 +131,10 @@ here:
 
 		case(CTRL_o): // inserts file
 			i_H buffer[128];
-			mvprintw(39, 24, "Folder Name:");
+			mvprintw(42, 1, "Folder Name:");
 			cbreak();
 			echo();
-			mvscanw(39, 38, "%127s", buffer);
+			mvscanw(42, 15, "%127s", buffer);
 			c->usefile = dc_strdup(buffer);
 			noecho();
 			refresh();
