@@ -17,10 +17,10 @@ t_cleanup_function	cleanup(t_program *c)
 	if (c->title)
 		free(c->title);
 	free_file_entries(c->file_entries, c->filecount);
-
-
-
-
+	if (c->copyfile)
+		free(c->copyfile);
+	if (c->copyfilename)
+		free(c->copyfilename);
 
 	endwin();
 	if (c)

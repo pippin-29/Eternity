@@ -38,7 +38,7 @@ here:
 		case(CTRL_b): // paste file/folder
 			if (c->copyfile && c->copyfilename)
 			{
-				c->usefile = dc_strjoin_e(7, "cp -r", " ", c->copyfile, " ", c->cwd, "/", c->copyfilename);
+				c->usefile = dc_strjoin_e(8, "cp -r", " ", c->copyfile, " ", c->cwd, "/", c->copyfilename, ">/dev/null 2>&1");
 				system(c->usefile);
 				free(c->usefile);
 				list_dir_content(c);

@@ -146,7 +146,7 @@ none	draw_(t_program *c)
 		i++;
 	}
 	wrapped_mvprintw(38, 1, 96, c->cwd);
-	mvprintw(50, 2, "Copied: %s  Filename: %s", c->copyfile, c->copyfilename);
+	mvprintw(43, 1, "Copied: %s", c->copyfile);
 	draw_panes(c);
 	
 }

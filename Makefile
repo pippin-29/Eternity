@@ -6,7 +6,7 @@ C_COMPILER := gcc
 CFLAGS := 
 LDFLAGS := -lncurses
 FLAGS := -Wextra -Werror -Wall
-ADDSAN := -fsanitize=address
+ADDSAN := -fsanitize=address -g
 
 # Define source and object directories
 SRC_DIR := source/

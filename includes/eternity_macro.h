@@ -39,6 +39,7 @@
 # define CTRL_o						('o' & 0x1f)
 # define CTRL_u						('u' & 0x1f)
 # define CTRL_b						('b' & 0x1f)
+# define CTRL_z						('z' & 0x1f)
 
 
 # define DIRECTORY		4

@@ -29,9 +29,21 @@ none	list_dir_content(t_program *c)
 
 	iP_1	i;
 
-	i = 0;
+	i = 2;
 	while ((c->entry = readdir(c->directory)))
 	{
+		if (strcmp(c->entry->d_name, "..") == 0)
+		{
+			c->file_entries[1].name = dc_strdup(c->entry->d_name);
+			c->file_entries[1].type = c->entry->d_type;
+			continue ;
+		}
+		if (strcmp(c->entry->d_name, ".") == 0)
+		{
+			c->file_entries[0].name = dc_strdup(c->entry->d_name);
+			c->file_entries[0].type = c->entry->d_type;
+			continue ;
+		}
 		c->file_entries[i].name = dc_strdup(c->entry->d_name);
 		c->file_entries[i].type = c->entry->d_type;
 		i++;
