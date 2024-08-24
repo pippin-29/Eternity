@@ -71,6 +71,7 @@ here:
 						free(c->copyfile);
 					if (c->copyfilename)
 						free(c->copyfilename);
+					c->isamover = 0;
 					c->fileselected = 0;
 					c->copyfilename = dc_strdup(c->file_entries[c->currentfile].name);
 					c->copyfile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
@@ -82,6 +83,7 @@ here:
 						free(c->copyfile);
 					if (c->copyfilename)
 						free(c->copyfilename);
+					c->isamover = 0;
 					c->fileselected = 0;
 					c->copyfilename = dc_strdup(c->file_entries[c->currentfile].name);
 					c->copyfile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
