@@ -6,3 +6,5 @@
 	- shouldn't flash now, use erase() instead of clear();
  - copy and paste function
  - copying folder directly into same folder's working directory will make folder in folder to be copied
+ - can move and rename folders with mv
+ - clipboard can be cleared
