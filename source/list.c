@@ -11,7 +11,11 @@
 
 #include "../includes/eternity.h"
 
-
+iP_1 compare_entries(const none *a, const none *b) {
+	const t_file_entries *entryA = a;
+	const t_file_entries *entryB = b;
+    return strcmp(entryA->name, entryB->name);
+}
 
 none	list_dir_content(t_program *c)
 {
@@ -48,5 +52,6 @@ none	list_dir_content(t_program *c)
 		c->file_entries[i].type = c->entry->d_type;
 		i++;
 	}
+	qsort(c->file_entries + 2, i - 2, sizeof(t_file_entries), compare_entries);
 	closedir(c->directory);
 }

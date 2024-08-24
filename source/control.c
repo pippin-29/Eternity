@@ -46,10 +46,10 @@ here:
 			{
 				if (c->isamover == 0)
 				{
-				c->usefile = dc_strjoin_e(8, "cp -r", " ", c->copyfile, " ", c->cwd, "/", c->copyfilename, ">/dev/null 2>&1");
-				system(c->usefile);
-				free(c->usefile);
-				list_dir_content(c);					
+					c->usefile = dc_strjoin_e(8, "cp -r", " ", c->copyfile, " ", c->cwd, "/", c->copyfilename, ">/dev/null 2>&1");
+					system(c->usefile);
+					free(c->usefile);
+					list_dir_content(c);					
 				}
 				else if (c->isamover == 1)
 				{
@@ -60,7 +60,6 @@ here:
 				}
 
 			}
-
 			goto here;
 
 		case(CTRL_u): // copy file/folder
