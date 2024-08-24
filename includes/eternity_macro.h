@@ -40,6 +40,9 @@
 # define CTRL_u						('u' & 0x1f)
 # define CTRL_b						('b' & 0x1f)
 # define CTRL_z						('z' & 0x1f)
+# define CTRL_t						('t' & 0x1f)
+# define CTRL_a						('a' & 0x1f)
+# define ESC						(27)
 
 
 # define DIRECTORY		4

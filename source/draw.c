@@ -118,7 +118,7 @@ none	draw_(t_program *c)
 		i++;
 	}
 	i = 33;
-	while (i < 38)
+	while (i < 39)
 	{
 		mvprintw(i, P_0, "|");
 		mvprintw(i, P_1, "|");
@@ -130,23 +130,31 @@ none	draw_(t_program *c)
 	mvprintw(34, 2, "Enter    - Use File");
 	mvprintw(35, 2, "CTRL_DEL - Remove File/Folder");
 	mvprintw(36, 2, "CTRL_I   - Insert File");
+	mvprintw(37, 2, "CTRL_E   - Rename File/Folder");
 
 	mvprintw(34, 34, "CTRL_R   - Run Program");
 	mvprintw(35, 34, "CTRL_U   - Copy File/Folder");	
 	mvprintw(36, 34, "CTRL_O   - Insert Folder");
+	mvprintw(37, 34, "CTRL_A   - Move File/Folder");
 
 	mvprintw(34, 66, "PgUp     - Prev Pane");
 	mvprintw(35, 66, "CTRL_B   - Paste File/Folder");	
 	mvprintw(36, 66, "PgDn     - Next Pane");
+	mvprintw(37, 66, "ESC      - Clear Clipboard");
+
 
 	i = 0;
 	while (i <= 96)
 	{
-		mvprintw(37, i, "-");
+		mvprintw(38, i, "-");
 		i++;
 	}
-	wrapped_mvprintw(38, 1, 96, c->cwd);
-	mvprintw(43, 1, "Copied: %s", c->copyfile);
+	wrapped_mvprintw(39, 1, 96, c->cwd);
+	if (c->isamover)
+		mvprintw(43, 1, "Moving: %s", c->copyfile);	
+	else if (c->isamover == 0)
+		mvprintw(43, 1, "Copied: %s", c->copyfile);	
+	
 	draw_panes(c);
 	
 }

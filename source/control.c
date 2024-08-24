@@ -34,14 +34,31 @@ here:
 		case(CTRL_q): // quit
 			clear();
 			break ;
+		
+		case(ESC):
+			c->isamover = 0;
+			c->copyfile = NULL;
+			c->copyfilename = NULL;
+			goto here;
 
 		case(CTRL_b): // paste file/folder
 			if (c->copyfile && c->copyfilename)
 			{
+				if (c->isamover == 0)
+				{
 				c->usefile = dc_strjoin_e(8, "cp -r", " ", c->copyfile, " ", c->cwd, "/", c->copyfilename, ">/dev/null 2>&1");
 				system(c->usefile);
 				free(c->usefile);
-				list_dir_content(c);
+				list_dir_content(c);					
+				}
+				else if (c->isamover == 1)
+				{
+					c->usefile = dc_strjoin_e(7, "mv", " ", c->copyfile, " ", c->cwd, "/", c->copyfilename, ">/dev/null 2>&1");
+					system(c->usefile);
+					free(c->usefile);
+					list_dir_content(c);	
+				}
+
 			}
 
 			goto here;
@@ -140,25 +157,78 @@ here:
 			mkdir(c->usefile, 0755);
 			free(c->usefile);
 			list_dir_content(c);
-			goto here;	
+			goto here;
+
+		case(CTRL_t): // renames file/folder
+			if (c->fileselected == 1)
+			{
+				c->fileselected = 0;
+				i_H buffer[128];
+				mvprintw(42, 1, "File/Folder Name:");
+				cbreak();
+				echo();
+				mvscanw(42, 20, "%127s", buffer);
+				c->usefile = dc_strjoin_e(5, "mv", " ", c->file_entries[c->currentfile].name, " ",  buffer);
+				system(c->usefile);
+				noecho();
+				refresh();
+				free(c->usefile);
+				list_dir_content(c);
+			}
+			goto here;
+
+			case(CTRL_a): // moves file/folder
+			if (c->fileselected == 1)
+			{
+				if (c->file_entries[c->currentfile].type == REG_FILE)
+				{
+					c->isamover = 1;
+					if (c->copyfile)
+						free(c->copyfile);
+					if (c->copyfilename)
+						free(c->copyfilename);
+					c->fileselected = 0;
+					c->copyfilename = dc_strdup(c->file_entries[c->currentfile].name);
+					c->copyfile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+					list_dir_content(c);
+				}
+				else if (c->file_entries[c->currentfile].type == DIRECTORY)
+				{
+					c->isamover = 1;
+					if (c->copyfile)
+						free(c->copyfile);
+					if (c->copyfilename)
+						free(c->copyfilename);
+					c->fileselected = 0;
+					c->copyfilename = dc_strdup(c->file_entries[c->currentfile].name);
+					c->copyfile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+					list_dir_content(c);
+				}
+			}
+			goto here;
 
 		case('\n'): // Use File or Folder
-			if (c->file_entries[c->currentfile].type == REG_FILE && c->fileselected == 1)
+			if (c->fileselected == 1)
 			{
-				endwin();
-				c->usefile = dc_strjoin_e(5, "nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
-				system(c->usefile); free(c->usefile);
-				initscr();
-				keypad(stdscr, TRUE);
-				list_dir_content(c);				
-			} 
-			else if (c->file_entries[c->currentfile].type == DIRECTORY && c->fileselected == 1)
-			{
-				c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
-				chdir(c->usefile);
-				free(c->usefile);
-				getcwd(c->cwd, 1024);
-				list_dir_content(c);
+				if (c->file_entries[c->currentfile].type == REG_FILE)
+				{
+					c->fileselected = 0;
+					endwin();
+					c->usefile = dc_strjoin_e(5, "nano", " ", c->cwd, "/", c->file_entries[c->currentfile].name);
+					system(c->usefile); free(c->usefile);
+					initscr();
+					keypad(stdscr, TRUE);
+					list_dir_content(c);				
+				} 
+				else if (c->file_entries[c->currentfile].type == DIRECTORY)
+				{
+					c->fileselected = 0;
+					c->usefile = dc_strjoin_e(3, c->cwd, "/", c->file_entries[c->currentfile].name);
+					chdir(c->usefile);
+					free(c->usefile);
+					getcwd(c->cwd, 1024);
+					list_dir_content(c);
+				}				
 			}
 			goto here;
 		

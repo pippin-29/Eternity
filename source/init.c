@@ -19,6 +19,7 @@ none	init_(t_program *c, i_H * title)
 	c->cursorX = 1;
 	c->cursorY = 2;
 	c->currentfile = -1;
+	c->isamover = 0;
 	c->copyfile = NULL;
 	c->copyfilename = NULL;
 	getcwd(c->cwd, sizeof(c->cwd));

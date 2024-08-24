@@ -54,6 +54,7 @@ typedef struct s_eternity
 
 	iP_1			currentfile;
 	i_P				fileselected;
+	i_P				isamover;
 	i_H 			*usefile;
 	i_H				*copyfile;
 	i_H				*copyfilename;
