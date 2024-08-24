@@ -22,7 +22,7 @@ OBJECTS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SOURCE))
 LINK := $(C_COMPILER) $(FLAGS) $(ADDSAN) -o $(TARGET) $(OBJECTS) $(CFLAGS) $(LDFLAGS)
 
 
-test: all
+test: clean all
 
 
 # Default rule to build the target executable
